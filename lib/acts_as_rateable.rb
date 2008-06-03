@@ -26,6 +26,7 @@ module ActiveRecord
 	    end
 			
 			module SingletonMethods
+				# Find all objects rated by score.
 				def find_average_of( score )
           find(:all, :include => [:rates] ).collect {|i| i if i.average_rating.to_i == score }.compact
 				end
