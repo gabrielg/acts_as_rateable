@@ -33,4 +33,4 @@ Post.find_average_of( 4 ) #=> array of posts
 
 See acts_as_rateable.rb for further details!
 
-Copyright (c) 2007 Ferenc Fekete, released under the MIT license
+Copyright (c) 2007 Ferenc Fekete, http://xpnindustries.com , released under the MIT license
