@@ -39,10 +39,17 @@ module ActiveRecord
           average_rating * f
         end
         
-        # Checks wheter a user rated the object or not.
-        def rated_by?(user_id )
+        # Checks whether a user rated the object or not.
+        def rated_by?(user_id)
           ratings.exists?(:user_id => user_id)
         end
+
+        # Returns the rating a specific user has given the object.
+        def rating_by(user_id)
+          rating = ratings.find_by_user_id(user_id)
+          rating ? rating.score : nil
+        end
+
       end
       
     end
