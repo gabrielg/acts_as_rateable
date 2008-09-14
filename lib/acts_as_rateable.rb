@@ -8,7 +8,11 @@ module ActiveRecord
       module ClassMethods
         def acts_as_rateable(options = {})
           has_many :ratings, :as => :rateable, :dependent => :destroy
-          
+          unless respond_to?(:max_rating)
+            class_inheritable_accessor :max_rating
+            attr_protected :max_rating
+            self.max_rating = options[:max_rating] || 5
+          end
           include ActiveRecord::Acts::Rateable::InstanceMethods
         end
       end
@@ -32,10 +36,9 @@ module ActiveRecord
           average_rating.round
         end
     
-        # Returns the average rating in percent. The maximal score must be provided or the default value (5) will be used.
-        # TODO make maximum_rating automatically calculated.
-        def average_rating_percent(maximum_rating = 5)
-          f = 100 / maximum_rating.to_f
+        # Returns the average rating in percent.
+        def average_rating_percent
+          f = 100 / max_rating.to_f
           average_rating * f
         end
         
