@@ -6,10 +6,12 @@ class ActsAsRateableMigration < ActiveRecord::Migration
       t.column :score, :integer
       t.column :rateable_id, :integer
       t.column :rateable_type, :string, :limit => 32
+      t.column :category, :string, :null => true, :default => nil
       t.timestamps
     end
     
     add_index :ratings, [:rateable_id, :rateable_type]
+    add_index :ratings, :category
   end
   
   def self.down
