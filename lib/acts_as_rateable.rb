@@ -27,8 +27,8 @@ module ActiveRecord
         
         # Calculates the average rating. Calculation based on the already given scores.
         def average_rating
-          rating = (ratings(true).inject(0.0){|total,rating| total += rating.score}.to_f / ratings.size)
-          rating.nan? ? 0.0 : rating
+          avg = ratings.average(:score)
+          avg || 0.0
         end
 
         # Rounds the average rating value.
